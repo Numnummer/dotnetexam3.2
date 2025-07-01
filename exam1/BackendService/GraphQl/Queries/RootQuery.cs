@@ -10,9 +10,6 @@ public class RootQuery(IEntityService entityService):ObjectType
     {
         descriptor.Field("getEntities")
             .Type<ListType<ObjectType<Entity>>>()
-            .Resolve(context =>
-            {
-                return ValueTask.FromResult<object?>(EntityQuery.GetEntities().ToArray());
-            });
+            .Resolve(context => ValueTask.FromResult<object?>(EntityQuery.GetEntities().ToArray()));
     }
 }

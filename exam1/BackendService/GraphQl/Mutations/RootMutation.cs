@@ -12,29 +12,20 @@ public class RootMutation(IEntityService entityService):ObjectType
             .Type<ObjectType<Entity>>()
             .Argument("name", a => a.Type<NonNullType<StringType>>())
             .Argument("description", a => a.Type<NonNullType<StringType>>())
-            .Resolve(context =>
-            {
-                return ValueTask.FromResult<object?>(EntityMutation.CreateEntity(context.ArgumentValue<string>("name"),
-                    context.ArgumentValue<string>("description")));
-            });
+            .Resolve(context => ValueTask.FromResult<object?>(EntityMutation.CreateEntity(context.ArgumentValue<string>("name"),
+                context.ArgumentValue<string>("description"))));
         descriptor.Field("updateEntity")
             .Type<ObjectType<Entity>>()
             .Argument("id", a => a.Type<NonNullType<StringType>>())
             .Argument("name", a => a.Type<NonNullType<StringType>>())
             .Argument("description", a => a.Type<NonNullType<StringType>>())
-            .Resolve(context =>
-            {
-                return ValueTask.FromResult<object?>(EntityMutation.UpdateEntity(
-                    context.ArgumentValue<string>("id"),
-                    context.ArgumentValue<string>("name"),
-                    context.ArgumentValue<string>("description")));
-            });
+            .Resolve(context => ValueTask.FromResult<object?>(EntityMutation.UpdateEntity(
+                context.ArgumentValue<string>("id"),
+                context.ArgumentValue<string>("name"),
+                context.ArgumentValue<string>("description"))));
         descriptor.Field("deleteEntity")
             .Type<BooleanType>()
             .Argument("id", a => a.Type<NonNullType<StringType>>())
-            .Resolve(context =>
-            {
-                return ValueTask.FromResult<object?>(EntityMutation.DeleteEntity(context.ArgumentValue<string>("id")));
-            });
+            .Resolve(context => ValueTask.FromResult<object?>(EntityMutation.DeleteEntity(context.ArgumentValue<string>("id"))));
     }
 }
