@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+option csharp_namespace = "BackendService";
+
+package entity;
+
+service EntityGrpc {
+  rpc CreateEntity (CreateEntityRequest) returns (EntityResponse);
+  rpc GetAllEntities (GetAllEntitiesRequest) returns (EntityListResponse);
+  rpc UpdateEntity (UpdateEntityRequest) returns (EntityResponse);
+  rpc DeleteEntity (DeleteEntityRequest) returns (DeleteEntityResponse);
+}
+
+message CreateEntityRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message GetAllEntitiesRequest {
+  int32 page = 1;
+  int32 pageSize = 2;
+}
+
+message UpdateEntityRequest {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message DeleteEntityRequest {
+  string id = 1;
+}
+
+message EntityResponse {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message EntityListResponse {
+  repeated EntityResponse entities = 1;
+  int32 totalCount = 2;
+}
+
+message DeleteEntityResponse {
+  bool success = 1;
+}
